@@ -1,5 +1,5 @@
 # CS-300
-DSA: Analysis and Design 2026
+DSA: Analysis and Design 2026  
 What was the problem you were solving in the projects for this course?  
 How did you approach the problem? Consider why data structures are important to understand.  
 How did you overcome any roadblocks you encountered while going through the activities or project?  
