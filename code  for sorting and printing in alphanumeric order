@@ -1,0 +1,60 @@
+#include #include #include #include #include  
+
+using namespace std; 
+
+struct Course { string courseId; string title; vector prerequisites; }; 
+
+// Load courses from CSV file vector loadCourses(const string& filename) { vector courses; ifstream file(filename); 
+
+if (!file.is_open()) { 
+    cout << "Error: Could not open file." << endl; 
+    return courses; 
+} 
+ 
+string line; 
+while (getline(file, line)) { 
+    stringstream ss(line); 
+    string id, title, prereq; 
+    Course course; 
+ 
+    getline(ss, id, ','); 
+    getline(ss, title, ','); 
+ 
+    course.courseId = id; 
+    course.title = title; 
+ 
+    while (getline(ss, prereq, ',')) { 
+        course.prerequisites.push_back(prereq); 
+    } 
+ 
+    courses.push_back(course); 
+} 
+ 
+file.close(); 
+return courses; 
+  
+
+} 
+
+// Sort courses alphanumerically by course ID void sortCourses(vector& courses) { sort(courses.begin(), courses.end(), [](const Course& a, const Course& b) { return a.courseId < b.courseId; }); } 
+
+// Print all courses void printCourses(const vector& courses) { cout << "Course List (Alphanumeric Order):" << endl; for (const auto& course : courses) { cout << course.courseId << ": " << course.title << endl; } } 
+
+int main() { string filename = "courses.csv"; 
+
+vector<Course> courses = loadCourses(filename); 
+ 
+if (courses.empty()) { 
+    cout << "No courses loaded." << endl; 
+    return 0; 
+} 
+ 
+sortCourses(courses); 
+printCourses(courses); 
+ 
+return 0; 
+  
+
+} 
+
+ 
